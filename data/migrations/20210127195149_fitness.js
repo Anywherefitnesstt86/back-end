@@ -17,7 +17,7 @@ exports.up = async function(knex) {
         table.time("startTime").notNull()
         table.integer("duration").notNull()
         table.text("intensity").notNull()
-        table.string("locatioin").notNull()
+        table.string("location").notNull()
         table.integer("numberOfStudents").notNull()
         table.integer("maxClassSize").notNull()
     })
