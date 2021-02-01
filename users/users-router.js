@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const users = require("./users-model")
-// const { restrict } = require("./user-middleware")
+const restrict = require("../auth/restrict")
 
 
 //.....get ... /user
 
-router.get("/", (req, res) => {
+router.get("/", restrict("instructor"), (req, res) => {
     users.getUsers()
     .then(users => {
         res.status(200).json(users)
@@ -62,18 +62,8 @@ router.put("/:id", (req, res) => {
 })
 
 router.get("/logout", async (req, res, next) => {
-	try {
-		// deletes the session on the server-side, so the user is no longer authenticated
-		req.session.destroy((err) => {
-			if (err) {
-				next(err)
-			} else {
-				res.status(204).end()
-			}
-		})
-	} catch (err) {
-		next(err)
-	}
+    res.clearCookie("token");
+    res.send("You have logged out")
 })
 
 module.exports = router;
