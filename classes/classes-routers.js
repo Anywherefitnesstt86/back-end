@@ -1,17 +1,13 @@
 const express = require('express');
-const { addClass } = require('./classes-model');
+// const { addClass } = require('./classes-model');
 const router = express.Router();
 const classes = require("./classes-model")
 
 //GET Classes     /classes
-router.get("/", (req, res) => {
-    classes.getClasses()
-    .then(classes => {
-        res.status(200).json(classes)
-    }) 
-    .catch(err => {
-        res.status(500).json({ message: "Cannot get fitness class list." })
-    })
+router.get("/", (req, res, next) => {
+	classes.getClasses()
+		.then((classes) => res.status(200).json(classes))
+		.catch((err) => next(err))
 })
 
 //GET Classes BY ID    /classes/id
