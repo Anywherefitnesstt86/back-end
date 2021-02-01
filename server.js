@@ -4,6 +4,7 @@ const helmet = require("helmet")
 
 const userRouter = require("./users/users-router")
 const authRouter = require("./auth/auth-router")
+const classesRouter = require("./classes/classes-routers")
 
 const server = express()
 
@@ -13,6 +14,7 @@ server.use(express.json())
 
 server.use("/", authRouter)
 server.use("/users", userRouter)
+server.use("/classes", classesRouter)
 
 
 server.get("/", (req, res) => {
