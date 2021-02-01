@@ -7,35 +7,35 @@ const { validateUser } = require('../users/validation');
 
 
 router.post('/register', (req, res) => {
-  let user = req.body
+  let newUser = req.body
 
-  const validateResult = validateUser(user);
+  const validateResult = validateUser(newUser);
   if (validateResult.isSuccessful === true) {
-      const hash = bcrypt.hashSync(user.password, 14);
-      user.password = hash;
+      const hash = bcrypt.hashSync(newUser.password, 14);
+      newUser.password = hash;
 
-      Users.add(user)
+      Users.addUser(newUser)
           .then(saved => {
               const token = newToken(saved);
               res.status(201).json(token);
           })
           .catch(err => {
-              res.status(500).json({ message: 'I need this break', err })
+              res.status(500).json({ message: 'Error adding the user', err })
           })
   } else {
-      res.status(400).json({ Message: 'not valid', errors: validateUser(user) })
+      res.status(400).json({ Message: 'not valid', errors: validateUser(newUser) })
   }
 });
 
 router.post('/login', (req, res) => {
-  let { username, password } = req.body;
+  let { email, password } = req.body;
 
-  Users.findBy({ username })
+  Users.findBy({ email })
       .first()
       .then(user => {
           if (user && bcrypt.compareSync(password, user.password)) {
               const token = newToken(user);
-              res.status(200).json({ Message: `Welcome ${user.username}`, token });
+              res.status(200).json({ Message: `Welcome ${user.email}`, token });
           } else {
               res.status(401).json({ Message: 'Credentials not valid' });
           }

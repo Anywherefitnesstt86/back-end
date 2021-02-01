@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 const { jwtSecret } = require('../secrets/authSecret');
 
-function generateToken(username) {
+function generateToken(email) {
     const payload = {
-        subject: username.id,
-        username: username.username,
-        role: username.role || 'user',
+        subject: email.id,
+        email: email.email,
+        role: email.role || 'user',
     };
 
     const options = {
