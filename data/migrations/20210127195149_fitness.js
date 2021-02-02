@@ -1,7 +1,7 @@
 
 exports.up = async function(knex) {
     await knex.schema.createTable("users", (table) => {
-        table.integer("id").unique()
+        table.increments("id").unique()
         table.text("personName").notNull()
         table.text("email").notNull().unique()
         table.integer("isOverEighteen").notNull()
@@ -10,7 +10,7 @@ exports.up = async function(knex) {
     })
   
     await knex.schema.createTable("classes", (table)=> {
-        table.integer("id").unique()
+        table.increments("id").unique()
         table.string("className").notNull()
         table.string("classType").notNull()
         table.string("classDate").notNull()

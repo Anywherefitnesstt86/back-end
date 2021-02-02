@@ -1,7 +1,7 @@
 const supertest = require('supertest')
 const server = require('../server')
-const db = require('../config')
-const { intersect } = require('../config')
+const db = require('../data/config')
+const { intersect } = require('../data/config')
 
 beforeEach(async() => {
     await db.seed.run()
