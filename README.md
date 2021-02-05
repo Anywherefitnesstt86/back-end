@@ -116,7 +116,7 @@ classes Endpoints
 GET
 
     Requires user to be logged in
-    Returns a JSON object containing newly created sleep log data
+    Returns a JSON object containing newly created class
 
 Parameter        Description
 
@@ -189,7 +189,7 @@ Update Classes by ID
 Put
     Requires user to be logged in
     Requires a date string in the format 2020-08-20
-    Returns a JSON object containing sleep day log data for a user by date query
+    Returns a JSON object containing classes data 
   {
     "id": "1",
     "className": "oldie but goodie",
